@@ -15,37 +15,40 @@
 ```js
 import mitt from "@/uni_modules/tob-mitt/index.js"
 
+const bus = mitt()
+
 // 注册两个指定类型的事件函数
-mitt.on('foo', () => console.log('我是foo1'))
-mitt.on('foo', () => console.log('我是foo2'))
+bus.on('foo', () => console.log('我是foo1'))
+bus.on('foo', () => console.log('我是foo2'))
 
 // 触发该类型的事件函数
-mitt.emit('foo') // 将打印 我是foo1，我是foo2
+bus.emit('foo') // 将打印 我是foo1，我是foo2
 
 // 注册一个带形参的事件函数
-mitt.on('bar', (msg) => console.log(msg))
+bus.on('bar', (msg) => console.log(msg))
 
 // 触发事件函数的同时设置实参
-mitt.emit('bar', '你好') // 将打印 你好
+bus.emit('bar', '你好') // 将打印 你好
 
-mitt.off('bar') // 卸载所有 bar 事件函数
+bus.off('bar') // 卸载所有 bar 事件函数
 
 const bar = () => console.log('我好')
-mitt.on('bar', bar)
-mitt.off('bar', bar) // 单独卸载该事件函数
+bus.on('bar', bar)
+bus.off('bar', bar) // 单独卸载该事件函数
 
-mitt.emit('bar') // 因为被卸载了，所以什么都不会触发
+bus.emit('bar') // 因为被卸载了，所以什么都不会触发
 
 // 注册所有类型的事件函数
-mitt.on('*', () => {
+bus.on('*', () => {
     console.log("不论什么时候都会触发")
 })
 
-mitt.emit('*') // 打印 不论什么时候都会触发
+// 触发 * 类型的事件函数
+bus.emit() // 打印 不论什么时候都会触发
 
-mitt.emit('foo') // 打印 我是foo1，我是foo2 不论什么时候都会触发
+bus.emit('foo') // 打印 我是foo1，我是foo2 不论什么时候都会触发
 
-mitt.all // 保存事件函数的 map
+bus.all // 保存事件函数的 map
 ```
 
 <br />
