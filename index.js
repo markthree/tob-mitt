@@ -2,7 +2,7 @@ export default function mitt(all) {
 	all = all || new Map()
 	return {
 		/**
-		 * 一个保存了注册函数的 map.
+		 * 保存了事件函数的 map.
 		 */
 		all,
 		/**
@@ -66,3 +66,5 @@ export default function mitt(all) {
 		}
 	}
 }
+
+
